@@ -30,11 +30,11 @@ class MainActivity : ComponentActivity() {
                 Column(
                     modifier = Modifier.fillMaxSize(),
                     verticalArrangement = Arrangement.Top) {
-                    ImageHead()
                     ArticleContent(
                         title = stringResource(R.string.article_title),
-                        content = stringResource(R.string.article_body),
-                        extra = stringResource(R.string.article_extra)
+                        shortDescription = stringResource(R.string.article_body),
+                        longDescription = stringResource(R.string.article_extra),
+                        imagePainter = painterResource(id = R.drawable.article_image)
                     )
                 }
             }
@@ -43,33 +43,35 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun ArticleContent(modifier: Modifier = Modifier, title: String, content: String, extra: String) {
+fun ArticleContent(
+    modifier: Modifier = Modifier,
+    title: String,
+    shortDescription: String,
+    longDescription: String,
+    imagePainter: Painter
+) {
     Column(modifier = modifier) {
+        Image(
+            painter = imagePainter,
+            contentDescription = stringResource(id = R.string.app_name),
+            contentScale = ContentScale.FillWidth
+        )
         Text(
             text = title,
             fontSize = 24.sp,
             modifier = Modifier.padding(16.dp)
         )
         Text(
-            text = content,
+            text = shortDescription,
             textAlign = TextAlign.Justify,
-            modifier = Modifier.padding(16.dp)
+            modifier = Modifier.padding(start = 16.dp, end = 16.dp)
         )
         Text(
-            text = extra,
+            text = longDescription,
             textAlign = TextAlign.Justify,
             modifier = Modifier.padding(16.dp)
         )
     }
-}
-
-@Composable
-fun ImageHead() {
-    Image(
-        painter = painterResource(id = R.drawable.bg_compose_background),
-        contentDescription = stringResource(id = R.string.app_name),
-        contentScale = ContentScale.FillWidth
-    )
 }
 
 @Preview(showBackground = true)

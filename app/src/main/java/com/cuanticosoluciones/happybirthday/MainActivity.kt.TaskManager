@@ -27,7 +27,12 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             HappyBirthdayTheme {
-                TaskManager(Modifier)
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    TaskManager(Modifier)
+                }
             }
         }
     }
@@ -40,26 +45,26 @@ fun TaskManagerPreview() {
 }
 
 @Composable
-fun TaskManager(modifier: Modifier = Modifier) {
+fun TaskManager() {
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
             painter = painterResource(id = R.drawable.ic_task_completed),
             contentDescription = stringResource(id = R.string.tasks_completed_title),
-            contentScale = ContentScale.Crop,
-            modifier = modifier.padding(16.dp)
         )
         Text(
             text = stringResource(id = R.string.tasks_completed_title),
             fontWeight = androidx.compose.ui.text.font.FontWeight.Bold,
             modifier = modifier.padding(top=24.dp, bottom=8.dp)
         )
-        Text(text = stringResource(id = R.string.tasks_completed_qualification),
+        Text(
+            text = stringResource(id = R.string.tasks_completed_qualification),
             fontSize = 16.sp,
-            modifier = modifier.padding(16.dp)
         )
     }
 }
