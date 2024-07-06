@@ -6,15 +6,11 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -31,13 +27,14 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             HappyBirthdayTheme {
-                Surface(
+                Column(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    GreetingImage(
-                        message = "Happy Birthday Sam!",
-                        from = "From: Emma"
+                    verticalArrangement = Arrangement.Top) {
+                    ImageHead()
+                    ArticleContent(
+                        title = stringResource(R.string.article_title),
+                        content = stringResource(R.string.article_body),
+                        extra = stringResource(R.string.article_extra)
                     )
                 }
             }
@@ -46,55 +43,46 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun GreetingText(modifier: Modifier = Modifier, message: String = "Happy Birthday!!", from: String) {
-    Column (
-        verticalArrangement = Arrangement.Center,
-        modifier = modifier
-    ) {
+fun ArticleContent(modifier: Modifier = Modifier, title: String, content: String, extra: String) {
+    Column(modifier = modifier) {
         Text(
-            text = message,
-            fontSize = 100.sp,
-            lineHeight = 116.sp,
-            textAlign = TextAlign.Center
+            text = title,
+            fontSize = 24.sp,
+            modifier = Modifier.padding(16.dp)
         )
         Text(
-            text = from,
-            fontSize = 36.sp,
-            modifier = Modifier
-                .padding(16.dp)
-                .align(alignment = Alignment.CenterHorizontally)
+            text = content,
+            textAlign = TextAlign.Justify,
+            modifier = Modifier.padding(16.dp)
+        )
+        Text(
+            text = extra,
+            textAlign = TextAlign.Justify,
+            modifier = Modifier.padding(16.dp)
         )
     }
+}
+
+@Composable
+fun ImageHead() {
+    Image(
+        painter = painterResource(id = R.drawable.bg_compose_background),
+        contentDescription = stringResource(id = R.string.app_name),
+        contentScale = ContentScale.FillWidth
+    )
 }
 
 @Preview(showBackground = true)
 @Composable
-fun BirthdayCardPreview() {
-    HappyBirthdayTheme {
-        GreetingImage(
-            message = stringResource(R.string.happy_birthday_text),
-            from = stringResource(R.string.signature_text)
-        )
-    }
-}
-
-@Composable
-fun GreetingImage(modifier: Modifier = Modifier, message: String, from: String) {
-    val image = painterResource(R.drawable.androidparty)
-    Box(modifier) {
-        Image(
-            modifier = modifier.fillMaxSize(),
-            painter = image,
-            contentDescription = null,
-            contentScale = ContentScale.Crop,
-            alpha = 0.5F
-        )
-        GreetingText(
-            from = from,
-            message = message,
-            modifier = modifier
-                .fillMaxSize()
-                .padding(8.dp)
+fun ArticlesPreview() {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Top) {
+        ImageHead()
+        ArticleContent(
+            title = stringResource(R.string.article_title),
+            content = stringResource(R.string.article_body),
+            extra = stringResource(R.string.article_extra)
         )
     }
 }
