@@ -23,4 +23,11 @@
     <string name="content_2">Creates a composable that lays out and draws a given Painter class object.</string>
     <string name="content_3">A layout composable that places its children in a horizontal sequence.</string>
     <string name="content_4">A layout composable that places its children in a vertical sequence.</string>
+
+    <!-- Business Card -->
+    <string name="bsc_name">Edwin Marte Torres</string>
+    <string name="bsc_title">Software Engineer</string>
+    <string name="bsc_email">kdgpro15@gmail.com</string>
+    <string name="bsc_phone">+1 849–631–4461</string>
+    <string name="bsc_social">em-torres</string>
 </resources>
